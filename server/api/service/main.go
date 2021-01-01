@@ -46,8 +46,7 @@ func HandleFileUpload(f *multipart.FileHeader, c *gin.Context, db *gorm.DB, URL 
 	} else if entry.Path != constants.InvalidPath {
 		return errors.New("Previously associated URL")
 	}
-	pwd, _ := os.Getwd()
-	storagePath := filepath.Join(pwd, constants.FSPathPrefix, time.Now().Format(constants.TimeFormat))
+	storagePath := filepath.Join(constants.FSPathPrefix, time.Now().Format(constants.TimeFormat), URL)
 
 	// Create required directories, as needed
 	err := os.MkdirAll(storagePath, os.FileMode(constants.Perms))

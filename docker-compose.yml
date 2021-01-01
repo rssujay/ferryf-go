@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  server:
+    build:
+      context: "./server"
+      dockerfile: "./Dockerfile"
+    ports:
+      - "8000:8080"
+    restart: on-failure
+    volumes: 
+      - "./ferryf_FS:/var/ferryf_FS"
+
+  # db:
+  #   image: postgres:12
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: example
+  #     POSTGRES_PASSWORD: example
