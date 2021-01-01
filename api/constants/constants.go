@@ -8,3 +8,6 @@ var FSPathPrefix string = "ferryf_FS"
 
 // TimeFormat formats the current datetime into a fs-friendly representation (daily)
 var TimeFormat string = "2006-01-02"
+
+// Perms refer to the filesystem permission bits
+var Perms = 0755

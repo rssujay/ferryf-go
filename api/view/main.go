@@ -52,5 +52,16 @@ func StartAPI(db *gorm.DB, router *gin.Engine) {
 			}
 			c.SecureJSON(http.StatusOK, gin.H{})
 		})
+
+		api.GET("/files/:URL", func(c *gin.Context) {
+			URL := c.Param("URL")
+			path, name, err := service.RetrieveFile(db, URL)
+			if err != nil {
+				fmt.Println(err)
+				c.SecureJSON(http.StatusNotFound, gin.H{})
+				return
+			}
+			c.FileAttachment(path, name)
+		})
 	}
 }
