@@ -9,7 +9,7 @@ import (
 type FileLink struct {
 	gorm.Model
 	Name string
-	URL  string
+	URL  string `gorm:"primaryKey"`
 	Path string
 }
 

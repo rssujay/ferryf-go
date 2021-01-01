@@ -1,6 +1,7 @@
 package view
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,11 +13,10 @@ import (
 func StartAPI(db *gorm.DB, router *gin.Engine) {
 	api := router.Group("/api/v1")
 	{
-		api.POST("/upload", func(c *gin.Context) {
+		api.POST("/filedata", func(c *gin.Context) {
 			type fileInput struct {
 				Name string `json:"name" binding:"required"`
 			}
-
 			var fileInp fileInput
 
 			err := c.BindJSON(&fileInp)
@@ -25,9 +25,32 @@ func StartAPI(db *gorm.DB, router *gin.Engine) {
 				return
 			}
 
+			identifier := service.HandleMetaDataUpload(db, fileInp.Name)
+			if identifier == "" {
+				c.SecureJSON(http.StatusInternalServerError, gin.H{})
+				return
+			}
 			c.SecureJSON(200, gin.H{
-				"URL": service.HandleUpload(db, fileInp.Name),
+				"URL": identifier,
 			})
+		})
+
+		api.POST("/files/:URL", func(c *gin.Context) {
+			URL := c.Param("URL")
+			file, err := c.FormFile("file")
+			if err != nil {
+				fmt.Println(err)
+				c.SecureJSON(http.StatusBadRequest, gin.H{})
+				return
+			}
+
+			err = service.HandleFileUpload(file, c, db, URL)
+			if err != nil {
+				fmt.Println(err)
+				c.SecureJSON(http.StatusBadRequest, gin.H{})
+				return
+			}
+			c.SecureJSON(http.StatusOK, gin.H{})
 		})
 	}
 }
