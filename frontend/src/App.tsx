@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import { Button } from 'primereact/button';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeflex/primeflex.css';
@@ -13,7 +12,6 @@ function App() {
       <div className="App-header">
         <h2>ferryf</h2>
         <Interactive />
-        <Button label="Click" />
       </div>
     </div>
   );
