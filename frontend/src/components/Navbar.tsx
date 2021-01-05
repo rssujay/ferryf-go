@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { TabMenu } from 'primereact/tabmenu'
-import items from '../constants/constants'
+import { NAV_LABELS } from '../constants/constants'
 
 interface NavbarProps {
     activeElement: any // MenuItem
@@ -16,7 +16,7 @@ export default class Navbar extends Component<NavbarProps, NavbarState> {
         super(props)
 
         this.state = {
-            items: items
+            items: NAV_LABELS
         }
     }
 
@@ -28,6 +28,7 @@ export default class Navbar extends Component<NavbarProps, NavbarState> {
                 activeItem={this.props.activeElement}
                 onTabChange={e => this.props.setActiveElement(e.value)}
                 />
+                <br />
             </div>
         )
     }

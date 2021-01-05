@@ -5,7 +5,7 @@ services:
       context: "./server"
       dockerfile: "./Dockerfile"
     ports:
-      - "8000:8080"
+      - "8080:8080"
     restart: on-failure
     volumes: 
       - "./ferryf_FS:/var/ferryf_FS"

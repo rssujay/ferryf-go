@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lithammer/shortuuid/v3"
 	"github.com/rssujay/ferryf-go/api/constants"
 	"github.com/rssujay/ferryf-go/data"
+	"github.com/teris-io/shortid"
 	"gorm.io/gorm"
 )
 
@@ -20,9 +20,14 @@ import (
 // 2. create a db entry to record these information
 // 3. returns the url for subsequent file upload and association
 func HandleMetaDataUpload(db *gorm.DB, name string) string {
+	sid, err := shortid.GetDefault().Generate()
+	if err != nil {
+		return ""
+	}
+
 	entry := data.FileLink{
 		Name: name,
-		URL:  shortuuid.New(),
+		URL:  sid,
 		Path: constants.InvalidPath,
 	}
 	result := db.Create(&entry)

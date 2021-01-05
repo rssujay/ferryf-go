@@ -1,4 +1,3 @@
-import React from 'react'
 import { Panel } from 'primereact/panel';
 
 export default function Faq() {
@@ -29,7 +28,7 @@ export default function Faq() {
             </Panel>
             <Panel header="Guarantees/Liabilities" toggleable collapsed>
                 <p>
-                    Absolutely none, since this project is unmaintained.<br /><hr />
+                    Absolutely none, since this project is unmaintained.<br /><br />
                     By using this service, you acknowledge that you are using ferryf at your own risk.
                     You will not hold the developer liable for any reason, e.g. loss or misuse of data.
                 </p>

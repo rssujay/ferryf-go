@@ -1,40 +1,38 @@
-import React from 'react'
 import { FileUpload } from 'primereact/fileupload';
-import {Steps} from 'primereact/steps';
+import { PARTIAL_FILE_ENDPOINT, FILEDATA_ENDPOINT, FILE_KEY, MAX_FILE_SIZE } from '../../constants/constants'
 import axios from 'axios';
 
-export default function Upload() {
-    // const [stepNumber, setStepNumber] = useState(0)
 
-    const items = [
-        {label: 'Choose file'},
-        {label: 'Confirmation'},
-        {label: 'Share link'},
-    ];
+type UploadStepProps = {
+    setStepIdx: any,
+    setURL: any,
+}
 
+export default function UploadStep(props: UploadStepProps) {
     const uploadHandler = async (event: any) => {
         try {
             if (event.files.length !== 1) {
                 throw new Error("Incorrect number of files selected")
             }
 
-            const response = await axios.post("/api/v1/filedata", { name : event.files[0].name })
+            const response = await axios.post(FILEDATA_ENDPOINT, { name : event.files[0].name })
             if (response.status !== 200 || !response.data.URL) {
                 throw new Error("API call failed")
             }
 
             const formData = new FormData()
-            formData.append('file', event.files[0])
+            formData.append(FILE_KEY, event.files[0])
             
             const sendFile = await axios.post(
-                `/api/v1/files/${response.data.URL}`,
+                `${PARTIAL_FILE_ENDPOINT}${response.data.URL}`,
                 formData,
                 { headers: { 'Content-Type': 'multipart/form-data' }}
                 )
             if (sendFile.status !== 200) {
                 throw new Error("File upload failure")
             }
-            // const response = await axios.post('/api/v1/filedata', { name: event.files })
+            props.setURL(response.data.URL)
+            props.setStepIdx(1)
         } catch (error) {
             console.log(error)
         }
@@ -42,8 +40,7 @@ export default function Upload() {
 
     return (
         <div>
-            <Steps model={items} />
-            <FileUpload maxFileSize={2000000} customUpload uploadHandler={uploadHandler} />
+            <FileUpload maxFileSize={MAX_FILE_SIZE} customUpload uploadHandler={uploadHandler} />
         </div>
     )
 }
