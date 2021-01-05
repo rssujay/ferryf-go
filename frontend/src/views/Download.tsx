@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 
 export default function Download() {
     const [link, setLink] = useState("")
-    const updateLink = (newLink: string) => setLink(newLink)
+    // const updateLink = (newLink: string) => setLink(newLink)
 
-    const download = () => {
+    // const download = () => {
 
-    }
+    // }
 
     return (
         <div>
-            <Button></Button>
-            // <a href={link} download={"test"}>Download</a>
+            {/* <Button></Button> */}
+            {/* <a href={link} download={"test"}>Download</a> */}
         </div>
     )
 }
