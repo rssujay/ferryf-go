@@ -5,11 +5,11 @@ export default function Faq() {
         <div>
             <Panel header="What is ferryf?" toggleable collapsed>
                 <p>
-                    ferryf is a proof of concept (POC) application to share files via the web without needing to sign in or install additional software.
+                    ferryf is a proof of concept application to share files via the web without needing to sign in or install additional software.
                     Users can upload a file (of size 2 MiB and below), and a link that can be used to download the file for the next 24 hours will be generated.
                 </p>
                 <p>
-                    ferryf aims to solve one-time sharing of files between devices, where it may not be as efficient to use conventional means e.g. setup connections / software.
+                    ferryf aims to solve sporadic sharing of files between devices, where it may not be as efficient to use conventional means e.g. setup connections / software.
                 </p>
                 <br />
                 <p>
@@ -28,8 +28,8 @@ export default function Faq() {
             </Panel>
             <Panel header="Guarantees/Liabilities" toggleable collapsed>
                 <p>
-                    Absolutely none, since this project is unmaintained.<br /><br />
-                    By using this service, you acknowledge that you are using ferryf at your own risk.
+                    Zero, since this project is unmaintained.<br /><br />
+                    By using this service, you acknowledge that you are using ferryf out of your own curiosity, at your own risk.
                     You will not hold the developer liable for any reason, e.g. loss or misuse of data.
                 </p>
             </Panel>
