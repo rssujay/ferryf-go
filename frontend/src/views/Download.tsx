@@ -1,6 +1,8 @@
 import { Component } from 'react'
 import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
 import { PARTIAL_FILE_ENDPOINT } from '../constants/constants';
+import axios from 'axios';
 
 type DownloadProps = { };
 type DownloadState = { 
@@ -10,10 +12,22 @@ type DownloadState = {
 export default class Download extends Component<DownloadProps, DownloadState> {
     constructor(props: any) {
         super(props)
-        console.log(window.location)
         this.state = {
             pathName: (window.location.pathname || '').replace('/', ''),
         }
+    }
+
+    downloadFile: any = async () => {
+        const { pathName } = this.state
+        const response = await axios.get(`${PARTIAL_FILE_ENDPOINT}${pathName}`, { responseType: "blob" })
+
+        const url = window.URL.createObjectURL(new Blob([response.data]))
+        const link = document.createElement('a')
+
+        link.href = url
+        link.setAttribute('download', response.request.getResponseHeader('Content-Disposition').split('"')[1])
+        document.body.appendChild(link)
+        link.click()
     }
 
     render() {
@@ -26,13 +40,13 @@ export default class Download extends Component<DownloadProps, DownloadState> {
                         this.setState({ pathName: target.value })
                     }} />
                 </p>
-                <a 
-                href={this.state.pathName === '' ? '#' : `${PARTIAL_FILE_ENDPOINT}${this.state.pathName}`} 
-                download
-                style={this.state.pathName === '' ? { textDecoration: 'none', color: 'red' } : { textDecoration: 'none', color: '#007bff' }}
-                >
-                   {this.state.pathName === '' ? 'Fill in the URL above' : 'Download' }
-                </a>  
+                <br />
+                <Button
+                    label={this.state.pathName === '' ? "Empty link" : "Download"} 
+                    icon="pi pi-download" 
+                    disabled={this.state.pathName === ''}
+                    onClick={this.downloadFile}
+                />
             </div>
         )
     }
