@@ -21,7 +21,7 @@ services:
       context: "."
       dockerfile: "./Dockerfile-build"
     ports:
-      - "80:8000"
+      - "80:80"
     restart: on-failure
     volumes:
       - "./ferryf_FS:/var/ferryf_FS"

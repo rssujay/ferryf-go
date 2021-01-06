@@ -51,7 +51,9 @@ func HandleFileUpload(f *multipart.FileHeader, c *gin.Context, db *gorm.DB, URL 
 	} else if entry.Path != constants.InvalidPath {
 		return errors.New("Previously associated URL")
 	}
-	storagePath := filepath.Join(constants.FSPathPrefix, time.Now().Format(constants.TimeFormat), URL)
+	commonPath := filepath.Join(time.Now().Format(constants.TimeFormat), URL)
+	storagePath := filepath.Join(constants.FSPathPrefix, commonPath)
+	locationPath := filepath.Join(constants.FSLocationPrefix, commonPath)
 
 	// Create required directories, as needed
 	err := os.MkdirAll(storagePath, os.FileMode(constants.Perms))
@@ -64,11 +66,12 @@ func HandleFileUpload(f *multipart.FileHeader, c *gin.Context, db *gorm.DB, URL 
 	if err := c.SaveUploadedFile(f, storagePath); err != nil {
 		return err
 	}
-	result.Update("Path", storagePath)
+
+	result.Update("Path", locationPath)
 	return nil
 }
 
-// RetrieveFile retrieves a file from the fs if it is available.
+// RetrieveFile retrieves a file's details from the db if it is available.
 // Todo: serve as redirect for nginx to serve instead
 func RetrieveFile(db *gorm.DB, URL string) (string, string, error) {
 	entry := data.FileLink{

@@ -3,6 +3,7 @@ package view
 import (
 	"fmt"
 	"net/http"
+	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 	"github.com/rssujay/ferryf-go/api/service"
@@ -61,7 +62,10 @@ func StartAPI(db *gorm.DB, router *gin.Engine) {
 				c.SecureJSON(http.StatusNotFound, gin.H{})
 				return
 			}
-			c.FileAttachment(path, name)
+			c.Header("X-Accel-Redirect", filepath.Join(path, name))
+			c.Writer.Header().Add("Content-Type", "")
+			c.Writer.Header().Add("Content-Disposition", name)
+			c.Status(http.StatusOK)
 		})
 	}
 }

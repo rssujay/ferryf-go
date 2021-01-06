@@ -25,7 +25,7 @@ export default class Download extends Component<DownloadProps, DownloadState> {
         const link = document.createElement('a')
 
         link.href = url
-        link.setAttribute('download', response.request.getResponseHeader('Content-Disposition').split('"')[1])
+        link.setAttribute('download', response.request.getResponseHeader('Content-Disposition'))
         document.body.appendChild(link)
         link.click()
     }
