@@ -4,12 +4,11 @@ services:
     build:
       context: "./server"
       dockerfile: "./Dockerfile"
-    ports:
-      - "8080:8080"
     restart: on-failure
     volumes: 
       - "./ferryf_FS:/var/ferryf_FS"
 
+  # We can use remote DB for now
   # db:
   #   image: postgres:12
   #   restart: always
@@ -20,7 +19,7 @@ services:
   nginx:
     build: 
       context: "."
-      dockerfile: : "./Dockerfile-build"
+      dockerfile: "./Dockerfile-build"
     ports:
       - "80:8000"
     restart: on-failure
