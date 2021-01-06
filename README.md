@@ -31,6 +31,7 @@ Here are some better, professionally-maintained [alternatives](https://blog.bit.
 - [Gin](https://github.com/gin-gonic/gin), a Golang web framework
 - Docker & Docker-Compose
 - Nginx (as reverse proxy, and (static/dynamic) file server)
+- PostgreSQL (this can be swapped out easily) 
 
 
 ## Setup instructions:
