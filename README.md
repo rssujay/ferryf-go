@@ -17,7 +17,7 @@ The idea behind ferryf is to allow for minimalist sharing of files between devic
 
 The technical motivations are to build a web project:
 - that involves some basic - intermediate complexity / concerns that occurs in the real world (e.g. file management and delivery)
-- that does not require too many features to be viable for a solo, short-term (at most a week) effort
+- that does not require too many features to be viable for a solo, short-term effort
 - that can increase familiarity with system design + newer frameworks / libraries
 
 By using this service, you acknowledge that you are using ferryf out of your own curiosity, at your own risk. You will not hold the developer liable for any reason, e.g. loss or misuse of data.
