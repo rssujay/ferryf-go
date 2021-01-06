@@ -1,0 +1,11 @@
+FROM node:12-buster-slim as builder
+
+COPY ./frontend /var/www/ferryf/frontend
+WORKDIR /var/www/ferryf/frontend
+RUN npm install
+RUN npm run build
+
+FROM nginx
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /var/www/ferryf/frontend/build /var/www/ferryf/frontend/build
