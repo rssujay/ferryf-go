@@ -20,9 +20,7 @@ The technical motivations are to build a web project:
 - that does not require too many features to be viable for a solo, short-term effort
 - that can increase familiarity with system design + newer frameworks / libraries
 
-By using this service, you acknowledge that you are using ferryf out of your own curiosity, at your own risk. You will not hold the developer liable for any reason, e.g. loss or misuse of data.
-
-Here are some better, professionally-maintained [alternatives](https://blog.bit.ai/free-file-sharing-sites/).
+Note: By using this service, you acknowledge that you are using ferryf out of your own curiosity, at your own risk. You will not hold the developer liable for any reason, e.g. loss or misuse of data. Here are some better, professionally-managed [alternatives](https://blog.bit.ai/free-file-sharing-sites/).
 
 ## Technologies used:
 
